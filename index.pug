@@ -1,0 +1,32 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Document
+        link(rel="stylesheet", href="./style/style.css")
+    body
+        #overlay
+            div#display_info
+                span Dialog auto-hide after 3 second of no mouse movement
+                span Amount of bounces: $_amount_of_bounces
+                span Amount of corner bounces: $_amount_of_corner_bounces
+            hr
+            label
+                span Image:
+                input#fileInput(type="file", accept="image/*")
+                button#resetFileInput Reset
+            label
+                span Number of "DVD" object:
+                input#numOfDVD
+            label
+                span Velocity X:
+                input#velocityX
+            label
+                span Velocity Y:
+                input#velocityY
+            div#button_container
+                button#reload Apply
+                button#resetCounter Reset counter
+        canvas#canvas
+    script(src="./script/script.js")
