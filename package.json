@@ -1,0 +1,24 @@
+{
+  "name": "project.template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "argparse": "^2.0.1",
+    "node-dir": "^0.1.17",
+    "node-watch": "^0.7.3",
+    "pug": "^3.0.2"
+  },
+  "devDependencies": {
+    "@types/argparse": "^2.0.10",
+    "@types/node": "^18.15.9",
+    "@types/node-dir": "^0.0.34",
+    "@types/pug": "^2.0.6",
+    "typescript": "^5.0.2"
+  }
+}
