@@ -9,8 +9,10 @@ html(lang="en")
         #overlay
             div#display_info
                 span Dialog auto-hide after 3 second of no mouse movement
+                span Hover over the dialog to stop the auto-hide
                 span Amount of bounces: $_amount_of_bounces
                 span Amount of corner bounces: $_amount_of_corner_bounces
+                span FPS: $_fps
             hr
             label
                 span Image:
@@ -25,7 +27,7 @@ html(lang="en")
             label
                 span Velocity Y:
                 input#velocityY
-            div#button_container
+            div.button_container
                 button#reload Apply
                 button#resetCounter Reset counter
         canvas#canvas

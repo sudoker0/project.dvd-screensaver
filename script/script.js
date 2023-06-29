@@ -66,11 +66,14 @@ var config = {
 var dvd = [];
 var lastFrameTime = 0;
 var animationFrame = 0;
+var totalFrameTime = 0;
+var totalFrameCount = 0;
 var outOfFocus = false;
 var resizeTimeout;
 var mouseMoveTimeout;
 var amountOfBounces = 0;
 var amountOfCornerBounces = 0;
+var hoveringOverlayDialog = false;
 function handleFileSelect(elm) {
     return __awaiter(this, void 0, void 0, function* () {
         const file = elm.files[0];
@@ -118,8 +121,17 @@ function createDVD() {
     }
 }
 function draw(timestamp) {
+    totalFrameCount++;
     const delta = timestamp - lastFrameTime;
     lastFrameTime = timestamp;
+    totalFrameTime += delta;
+    if (totalFrameTime >= 1000) {
+        OVERLAY_DIALOG.querySelector("#display_info").replace({
+            "fps": totalFrameCount.toString()
+        });
+        totalFrameCount = 0;
+        totalFrameTime = 0;
+    }
     ctx.fillStyle = "#000000";
     ctx.fillRect(0, 0, config.canvasWidth, config.canvasHeight);
     for (const i of dvd) {
@@ -225,6 +237,16 @@ RESET_COUNTER_BUTTON.addEventListener("click", () => {
     amountOfBounces = 0;
     amountOfCornerBounces = 0;
 });
+OVERLAY_DIALOG.addEventListener("mouseenter", () => {
+    hoveringOverlayDialog = true;
+    clearTimeout(mouseMoveTimeout);
+    OVERLAY_DIALOG.classList.remove("hide");
+    document.body.style.cursor = "default";
+});
+OVERLAY_DIALOG.addEventListener("mouseleave", () => {
+    hoveringOverlayDialog = false;
+    timeoutForMouseMove();
+});
 onload = () => {
     configReset();
     resize();
@@ -247,6 +269,8 @@ onfocus = () => {
     }
 };
 onmousemove = () => {
+    if (hoveringOverlayDialog)
+        return;
     clearTimeout(mouseMoveTimeout);
     timeoutForMouseMove();
     OVERLAY_DIALOG.classList.remove("hide");
